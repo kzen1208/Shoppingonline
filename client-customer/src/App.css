@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.body-customer {
+  width: 1150px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.body-admin {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+div.inline {
+  display: inline-block;
+}
+
+div.border-bottom {
+  border-bottom: 1px solid #000;
+  padding: 10px 0;
+}
+
+div.float-left {
+  float: left;
+}
+
+div.float-right {
+  float: right;
+}
+
+div.float-clear {
+  clear: both;
+}
+
+.align-center {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.align-valign-center {
+  width: fit-content;
+  margin: 32px auto;
+  padding: 24px 32px;
+  border: 1px solid #000;
+}
+
+.text-center {
+  text-align: center;
+}
+
+ul.menu {
+  margin: 0;
+  padding: 0;
+}
+
+li.menu {
+  display: inline;
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+
+form.search {
+  margin: 0;
+}
+
+input.keyword {
+  width: 160px;
+}
+
+.product-section {
+  padding-top: 24px;
+}
+
+.product-summary {
+  margin: 8px 0 24px;
+  color: #555;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.product-card {
+  border: 1px solid #d7d7d7;
+  padding: 16px;
+  background: #fff;
+}
+
+.product-image {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}
+
+.product-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  text-align: left;
+}
+
+.product-detail {
+  max-width: 980px;
+}
+
+.product-detail-image {
+  object-fit: contain;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.product-detail-table {
+  min-width: 420px;
+}
+
+.empty-state {
+  padding: 24px;
+  color: #666;
+}
+
+.datatable {
+  text-align: center;
+  border-collapse: collapse;
+}
+
+tr.datatable:first-child {
+  background-color: #ffcc00;
+}
+
+tr.datatable:not(:first-child):nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tr.datatable:not(:first-child):nth-child(odd) {
+  background-color: #ffeeaa;
+}
+
+tr.datatable:not(:first-child):hover {
+  background-color: #dcfcfc;
+  cursor: pointer;
+}
+
+span.link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+figure.caption-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+table td,
+table th {
+  padding: 8px 12px;
+}
+
+input,
+select {
+  padding: 6px 8px;
+  margin: 2px;
+}
