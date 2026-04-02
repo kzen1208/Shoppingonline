@@ -60,6 +60,11 @@ The root `package.json` will:
 - build both React apps
 - start the Express server from `server`
 
+The `.replit` file also includes Deployment commands for Replit Publish:
+
+- build: `npm run install:all && npm run build`
+- run: `npm run start:server`
+
 After startup:
 
 - `/admin` serves the built files from `client-admin/build`
