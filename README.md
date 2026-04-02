@@ -46,13 +46,27 @@ npm start
 
 ## Replit Deployment
 
-This repo is prepared to run on Replit with a single Express server:
+This repo is prepared to run on Replit with a single Express server.
+
+If you import this repository into Replit, use the root folder and run:
+
+```bash
+npm start
+```
+
+The root `package.json` will:
+
+- install dependencies for `client-admin`, `client-customer`, and `server`
+- build both React apps
+- start the Express server from `server`
+
+After startup:
 
 - `/admin` serves the built files from `client-admin/build`
 - `/` serves the built files from `client-customer/build`
 - `/api/*` continues to use the Express backend in `server`
 
-Build the two React apps first, then start the server:
+If you want to run the steps manually instead:
 
 ```bash
 cd client-admin

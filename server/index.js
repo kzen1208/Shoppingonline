@@ -12,6 +12,18 @@ const customerBuildPath = path.resolve(__dirname, "../client-customer/build");
 const adminIndexPath = path.join(adminBuildPath, "index.html");
 const customerIndexPath = path.join(customerBuildPath, "index.html");
 
+function sendBuildInstructions(res) {
+  return res.status(503).type("html").send(
+    [
+      "<h1>Frontend build not found</h1>",
+      "<p>Run the project from the repository root so Replit can install dependencies and build the two React apps automatically.</p>",
+      "<pre>npm start</pre>",
+      "<p>If you are starting the server manually, build these folders first:</p>",
+      "<pre>client-admin/build\nclient-customer/build</pre>"
+    ].join("")
+  );
+}
+
 app.use(cors());
 app.use(express.json({ limit: "25mb" }));
 app.use(express.urlencoded({ extended: true, limit: "25mb" }));
@@ -28,6 +40,14 @@ if (fs.existsSync(adminIndexPath)) {
   app.get("/admin/*", function (req, res) {
     res.sendFile(adminIndexPath);
   });
+} else {
+  app.get("/admin", function (req, res) {
+    return sendBuildInstructions(res);
+  });
+
+  app.get("/admin/*", function (req, res) {
+    return sendBuildInstructions(res);
+  });
 }
 
 if (fs.existsSync(customerIndexPath)) {
@@ -38,6 +58,14 @@ if (fs.existsSync(customerIndexPath)) {
     }
 
     return res.sendFile(customerIndexPath);
+  });
+} else {
+  app.get("*", function (req, res, next) {
+    if (req.path.startsWith("/api/")) {
+      return next();
+    }
+
+    return sendBuildInstructions(res);
   });
 }
 
