@@ -4,6 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
+    "prestart": "node scripts/ensureClientBuilds.js",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
