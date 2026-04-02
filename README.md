@@ -43,3 +43,31 @@ npm start
 - Server: `http://localhost:3000`
 - Admin: `http://localhost:3001/admin`
 - Customer: `http://localhost:3002`
+
+## Replit Deployment
+
+This repo is prepared to run on Replit with a single Express server:
+
+- `/admin` serves the built files from `client-admin/build`
+- `/` serves the built files from `client-customer/build`
+- `/api/*` continues to use the Express backend in `server`
+
+Build the two React apps first, then start the server:
+
+```bash
+cd client-admin
+npm install
+npm run build
+```
+
+```bash
+cd client-customer
+npm install
+npm run build
+```
+
+```bash
+cd server
+npm install
+npm start
+```

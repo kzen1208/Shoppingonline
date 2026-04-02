@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 
@@ -5,6 +7,10 @@ const MongooseUtil = require("./utils/MongooseUtil");
 
 const app = express();
 const port = process.env.PORT || 3000;
+const adminBuildPath = path.resolve(__dirname, "../client-admin/build");
+const customerBuildPath = path.resolve(__dirname, "../client-customer/build");
+const adminIndexPath = path.join(adminBuildPath, "index.html");
+const customerIndexPath = path.join(customerBuildPath, "index.html");
 
 app.use(cors());
 app.use(express.json({ limit: "25mb" }));
@@ -16,6 +22,25 @@ app.get("/hello", function (req, res) {
 
 app.use("/api/admin", require("./api/admin"));
 app.use("/api/customer", require("./api/customer"));
+
+if (fs.existsSync(adminIndexPath)) {
+  app.use("/admin", express.static(adminBuildPath));
+  app.get("/admin/*", function (req, res) {
+    res.sendFile(adminIndexPath);
+  });
+}
+
+if (fs.existsSync(customerIndexPath)) {
+  app.use("/", express.static(customerBuildPath));
+  app.get("*", function (req, res, next) {
+    if (req.path.startsWith("/api/")) {
+      return next();
+    }
+
+    return res.sendFile(customerIndexPath);
+  });
+}
+
 app.use(function (err, req, res, next) {
   console.error(err);
 

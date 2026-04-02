@@ -12,10 +12,7 @@ function getApiErrorMessage(
   }
 
   if (!error || !error.response) {
-    return (
-      "Cannot connect to the server. Please make sure backend is running " +
-      "on http://localhost:3000."
-    );
+    return "Cannot connect to the server. Please make sure the backend is running.";
   }
 
   return fallbackMessage;
