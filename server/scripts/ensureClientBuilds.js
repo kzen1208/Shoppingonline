@@ -30,19 +30,38 @@ function run(command, cwd) {
   });
 }
 
-if (hasBuilds()) {
-  console.log("Frontend builds found. Skipping automatic build.");
-  process.exit(0);
+function ensureClientBuilds() {
+  if (hasBuilds()) {
+    console.log("Frontend builds found. Skipping automatic build.");
+    return false;
+  }
+
+  if (!isHostedEnvironment()) {
+    console.log(
+      "Frontend builds are missing. Skipping automatic build outside hosted environment."
+    );
+    return false;
+  }
+
+  console.log("Frontend builds missing. Installing dependencies and building clients.");
+
+  run("npm install", adminDir);
+  run("npm run build", adminDir);
+  run("npm install", customerDir);
+  run("npm run build", customerDir);
+  return true;
 }
 
-if (!isHostedEnvironment()) {
-  console.log("Frontend builds are missing. Skipping automatic build outside hosted environment.");
-  process.exit(0);
+if (require.main === module) {
+  try {
+    ensureClientBuilds();
+  } catch (error) {
+    console.error("Automatic frontend build failed:", error.message);
+    process.exit(1);
+  }
 }
 
-console.log("Frontend builds missing. Installing dependencies and building clients.");
-
-run("npm install", adminDir);
-run("npm run build", adminDir);
-run("npm install", customerDir);
-run("npm run build", customerDir);
+module.exports = {
+  ensureClientBuilds,
+  hasBuilds
+};
